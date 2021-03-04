@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Loading from './Loading';
 import Item from './Item';
 import Header from './Header';
+import Footer from './Footer';
 
 export default class List extends Component {
     constructor(props) {
@@ -58,6 +59,7 @@ export default class List extends Component {
                         }
                     </div>
                 </div>
+                <Footer/>
             </React.Fragment>
         )
     }

@@ -8,7 +8,7 @@ export default class List extends Component {
         super(props);
         this.state = {
             isLoading: false,
-            videos: []
+            videos: null
         }
     }
 

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Loading from './Loading';
+import Item from './Item';
+import Header from './Header';
 
 export default class List extends Component {
     constructor(props) {
@@ -10,16 +12,30 @@ export default class List extends Component {
         }
     }
 
+    componentDidCatch(error, errorInfo) {
+        console.log(error)
+        console.log(errorInfo)
+    }
+
     componentDidMount() {
         this.setState({isLoading: true});
-        // Emulate a call to external API
+        // Emulate a call to an external API
         setTimeout(() => {
             this.setState({
                 isLoading: false,
                 videos: [
-                    {id: 1},
-                    {id: 2},
-                    {id: 3}
+                    {
+                        id: 0,
+                        title: 'Cucurrucucu Paloma - Gaby Moreno ',
+                        url: 'https://www.youtube.com/watch?v=mvI_Urnt3dk',
+                        thumbnail: 'https://i.ytimg.com/vi/mvI_Urnt3dk/hq720.jpg'
+                    },
+                    {
+                        id: 1,
+                        title: 'Tu me dejaste de querer - C. Tangana',
+                        url: 'https://www.youtube.com/watch?v=ltmO9XQVdSg',
+                        thumbnail: 'https://i.ytimg.com/vi/ltmO9XQVdSg/hq720.jpg'
+                    }
                 ]
             });
         }, 2000);
@@ -32,11 +48,12 @@ export default class List extends Component {
         }
         return (
             <React.Fragment>
+                <Header />
                 <div className="container">
                     <div className="grid-container">
                         {
                             videos && videos.map((video, i) => {
-                                return (<span key={i}>#{video.id}</span>)
+                                return (<Item key={i} data={video}/>)
                             })
                         }
                     </div>

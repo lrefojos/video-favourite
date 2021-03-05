@@ -10,7 +10,8 @@ export default class List extends Component {
         super(props);
         this.state = {
             isLoading: false,
-            videos: null
+            videos: null,
+            error: null
         }
     }
 
@@ -19,21 +20,30 @@ export default class List extends Component {
         console.log(errorInfo)
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setState({ isLoading: true });
-        // Emulate a call to an external API
-        getVideos().then((data) => {
+        try {
+            const videos = await getVideos();
             this.setState({
                 isLoading: false,
-                videos: data
+                videos
             });
-        })
+        } catch {
+            this.setState({
+                error: true,
+                isLoading: false
+            });
+        }
+      
     }
 
     render() {
-        const { videos, isLoading } = this.state;
+        const { videos, isLoading, error } = this.state;
         if (isLoading) {
             return (<Loading message="Loading..." />);
+        }
+        if (error) {
+            return (<p className="error"> {error.message} </p>);
         }
         return (
             <React.Fragment>

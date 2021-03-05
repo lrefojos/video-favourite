@@ -58,12 +58,28 @@ export const getVideos = () => new Promise((resolve, reject) => {
     }, FAKE_DELAY);
 });
 
+export const getDescription = async() => {
+    try {
+        const resp = await fetch('https://baconipsum.com/api/?type=all-meat&paras=3&start-with-lorem=1');
+        return resp.json()
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const getVideoDetail = ({idVideo}) => new Promise((resolve, reject) => {
     setTimeout(() => {
         const video = FAKE_DELAY.find((data) => data.id === idVideo);
         if (!video) {
             return reject({message: 'Video not found'});
         }
-        return resolve(video)
+        if (video.description) {
+            return resolve(video)
+        }
+
+        getDescription().then(description => {
+            video.description = description.join();
+            return resolve(video)
+        }).catch(console.error);
     }, FAKE_DELAY)
-})
+});

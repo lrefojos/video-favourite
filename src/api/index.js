@@ -69,7 +69,7 @@ export const getDescription = async() => {
 
 export const getVideoDetail = ({idVideo}) => new Promise((resolve, reject) => {
     setTimeout(() => {
-        const video = FAKE_DELAY.find((data) => data.id === idVideo);
+        const video = FAKE_DATA.find((data) => parseInt(data.id) === parseInt(idVideo));
         if (!video) {
             return reject({message: 'Video not found'});
         }

@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Loading from './Loading';
 import Item from './Item';
 import Header from './Header';
 import Footer from './Footer';
+import { getVideos } from '../api';
 
 export default class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
-            videos: null
+            videos: null,
+            error: null
         }
     }
 
@@ -18,34 +20,30 @@ export default class List extends Component {
         console.log(errorInfo)
     }
 
-    componentDidMount() {
-        this.setState({isLoading: true});
-        // Emulate a call to an external API
-        setTimeout(() => {
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+        try {
+            const videos = await getVideos();
             this.setState({
                 isLoading: false,
-                videos: [
-                    {
-                        id: 0,
-                        title: 'Cucurrucucu Paloma - Gaby Moreno ',
-                        url: 'https://www.youtube.com/watch?v=mvI_Urnt3dk',
-                        thumbnail: 'https://i.ytimg.com/vi/mvI_Urnt3dk/hq720.jpg'
-                    },
-                    {
-                        id: 1,
-                        title: 'Tu me dejaste de querer - C. Tangana',
-                        url: 'https://www.youtube.com/watch?v=ltmO9XQVdSg',
-                        thumbnail: 'https://i.ytimg.com/vi/ltmO9XQVdSg/hq720.jpg'
-                    }
-                ]
+                videos
             });
-        }, 2000);
+        } catch {
+            this.setState({
+                error: true,
+                isLoading: false
+            });
+        }
+      
     }
 
     render() {
-        const { videos, isLoading } = this.state;
+        const { videos, isLoading, error } = this.state;
         if (isLoading) {
-            return (<Loading message="Loading..."/>);
+            return (<Loading message="Loading..." />);
+        }
+        if (error) {
+            return (<p className="error"> {error.message} </p>);
         }
         return (
             <React.Fragment>
@@ -54,12 +52,12 @@ export default class List extends Component {
                     <div className="grid-container">
                         {
                             videos && videos.map((video, i) => {
-                                return (<Item key={i} data={video}/>)
+                                return (<Item key={i} data={video} />)
                             })
                         }
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </React.Fragment>
         )
     }

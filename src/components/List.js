@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Loading from './Loading';
 import Item from './Item';
 import Header from './Header';
 import Footer from './Footer';
+import { getVideos } from '../api';
 
 export default class List extends Component {
     constructor(props) {
@@ -19,33 +20,20 @@ export default class List extends Component {
     }
 
     componentDidMount() {
-        this.setState({isLoading: true});
+        this.setState({ isLoading: true });
         // Emulate a call to an external API
-        setTimeout(() => {
+        getVideos().then((data) => {
             this.setState({
                 isLoading: false,
-                videos: [
-                    {
-                        id: 0,
-                        title: 'Cucurrucucu Paloma - Gaby Moreno ',
-                        url: 'https://www.youtube.com/watch?v=mvI_Urnt3dk',
-                        thumbnail: 'https://i.ytimg.com/vi/mvI_Urnt3dk/hq720.jpg'
-                    },
-                    {
-                        id: 1,
-                        title: 'Tu me dejaste de querer - C. Tangana',
-                        url: 'https://www.youtube.com/watch?v=ltmO9XQVdSg',
-                        thumbnail: 'https://i.ytimg.com/vi/ltmO9XQVdSg/hq720.jpg'
-                    }
-                ]
+                videos: data
             });
-        }, 2000);
+        })
     }
 
     render() {
         const { videos, isLoading } = this.state;
         if (isLoading) {
-            return (<Loading message="Loading..."/>);
+            return (<Loading message="Loading..." />);
         }
         return (
             <React.Fragment>
@@ -54,12 +42,12 @@ export default class List extends Component {
                     <div className="grid-container">
                         {
                             videos && videos.map((video, i) => {
-                                return (<Item key={i} data={video}/>)
+                                return (<Item key={i} data={video} />)
                             })
                         }
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </React.Fragment>
         )
     }

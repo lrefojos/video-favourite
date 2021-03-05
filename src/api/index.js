@@ -37,10 +37,10 @@ const FAKE_DATA =  [
     },
     {
         id: 5,
-        title: 'Everything Now - Arcade Fire, Bomba Estéreo',
-        url: 'https://www.youtube.com/watch?v=CatAn-PtGqA',
-        embed: 'https://www.youtube.com/embed/CatAn-PtGqA',
-        thumbnail: 'https://i.ytimg.com/vi/CatAn-PtGqA/hq720.jpg'   
+        title: 'Bad Things - Allison Wonderland',
+        url: 'https://www.youtube.com/watch?v=FBBvgSgA1jg',
+        embed: 'https://www.youtube.com/embed/FBBvgSgA1jg',
+        thumbnail: 'https://i.ytimg.com/vi/FBBvgSgA1jg/hq720.jpg'   
     }
 ];
 

@@ -218,9 +218,10 @@ input[type="button"]:disabled {
 
 /* Footer */
 .footer-content {
-  background-color: grey;
+  background-color: black;
   color: white;
-  position: absolute;
+  position: fixed;
+  z-index: 99;
   bottom: 0;
   width: 100%;
   overflow-x: hidden;

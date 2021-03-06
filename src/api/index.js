@@ -10,8 +10,8 @@ const FAKE_DATA =  [
     {
         id: 1,
         title: 'Tu me dejaste de querer - C. Tangana',
-        url: 'https//www.youtube.com/watch?v=ltmO9XQVdSg',
-        embed: 'https//www.youtube.com/embed/ltmO9XQVdSg',
+        url: 'https://www.youtube.com/watch?v=ltmO9XQVdSg',
+        embed: 'https://www.youtube.com/embed/ltmO9XQVdSg',
         thumbnail: 'https://i.ytimg.com/vi/ltmO9XQVdSg/hq720.jpg'
     },
     {
@@ -41,6 +41,13 @@ const FAKE_DATA =  [
         url: 'https://www.youtube.com/watch?v=FBBvgSgA1jg',
         embed: 'https://www.youtube.com/embed/FBBvgSgA1jg',
         thumbnail: 'https://i.ytimg.com/vi/FBBvgSgA1jg/hq720.jpg'   
+    },
+    {
+        id: 6,
+        title: 'Solo De Mi - Bad Bunny',
+        url: 'https://www.youtube.com/watch?v=7rbprAR_Reg',
+        embed: 'https://www.youtube.com/embed/7rbprAR_Reg',
+        thumbnail: 'https://i.ytimg.com/vi/7rbprAR_Reg/hq720.jpg'
     }
 ];
 
@@ -69,7 +76,7 @@ export const getDescription = async() => {
 
 export const getVideoDetail = ({idVideo}) => new Promise((resolve, reject) => {
     setTimeout(() => {
-        const video = FAKE_DELAY.find((data) => data.id === idVideo);
+        const video = FAKE_DATA.find((data) => parseInt(data.id) === parseInt(idVideo));
         if (!video) {
             return reject({message: 'Video not found'});
         }

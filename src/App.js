@@ -1,7 +1,8 @@
-import List from './components/List'
+import Root from './components/Root';
+
 
 const App = () => (
-  <List />
+  <Root />
 )
 
 export default App;

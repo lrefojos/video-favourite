@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { getVideoDetail, getVideos } from '../api';
+import { getVideoDetail } from '../api';
 import Loading from './Loading';
 import Video from './Video';
 
@@ -15,9 +15,10 @@ export default class Details extends Component {
     }
 
     async componentDidMount() {
+        const { match } = this.props;
         this.setState({ isLoading: true });
         try {
-            const video = await getVideoDetail({ idVideo: this.props.match.params.id });
+            const video = await getVideoDetail({ idVideo: match.params.id });
             this.setState({
                 video,
                 isLoading: false
@@ -29,8 +30,9 @@ export default class Details extends Component {
 
     render() {
         const { isLoading, video, error } = this.state;
+        const { match } = this.props;
         if (isLoading || !video) {
-            return (<Loading message={`Loading video (#${this.props.match.params.id})....`} />)
+            return (<Loading message={`Loading video (#${match.params.id})....`} />)
         }
         if (error) {
             return <p className="error">{error.message}</p>

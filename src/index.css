@@ -230,3 +230,9 @@ input[type="button"]:disabled {
 .footer-content p {
   margin-left: 20px;
 }
+
+.footer-link {
+  float: right;
+  margin-right: 20px;
+  color: white;
+}

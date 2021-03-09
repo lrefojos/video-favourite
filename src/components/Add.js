@@ -14,7 +14,7 @@ export default class Add extends Component {
         return(
             <div className="modal">
                 <div className="modal-content">
-                   <span className="close" onClick={onClose(false)}></span>
+                   <span className="close" onClick={onClose(false)}>&times;</span>
                    <h2>Create a new video</h2>
                    HERE comes the modal 
                 </div>

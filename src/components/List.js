@@ -36,12 +36,12 @@ export default class List extends Component {
                 isLoading: false
             });
         }
-      
+
     }
 
     handleAdd = (e) => {
         e.preventDefault();
-        this.setState({showAdd: true})
+        this.setState({ showAdd: true })
     }
 
     handleCloseAdd = (reload) => {
@@ -55,7 +55,7 @@ export default class List extends Component {
                     const videos = await getVideos();
                     this.setState({
                         isLoading: false,
-                        showAdd: true,
+                        showAdd: false,
                         videos: videos
                     });
                 } catch(error) {
@@ -67,9 +67,7 @@ export default class List extends Component {
                     });
                 }
             } else {
-                this.setState({
-                    showAdd: false
-                })
+                this.setState({ showAdd: false });
             }
         }
     }
@@ -84,7 +82,7 @@ export default class List extends Component {
         }
         return (
             <React.Fragment>
-                <Header onClickAdd={this.handleAdd}/>
+                <Header onClickAdd={this.handleAdd} />
                 <div className="container">
                     <div className="grid-container">
                         {
@@ -94,7 +92,7 @@ export default class List extends Component {
                         }
                     </div>
                 </div>
-                {this.state.showAdd && (<Add onClose={this.handleCloseAdd}/>)}
+                {this.state.showAdd && (<Add onClose={this.handleCloseAdd} />)}
                 <Footer />
             </React.Fragment>
         )

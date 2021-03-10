@@ -61,7 +61,7 @@ export const addVideo = (newVideo) => new Promise((resolve, reject) => {
 
 export const getVideos = () => new Promise((resolve, reject) => {
     setTimeout(() => {
-        resolve(FAKE_DATA);
+        return resolve(FAKE_DATA);
     }, FAKE_DELAY);
 });
 
